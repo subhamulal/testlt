@@ -37,7 +37,7 @@ test_df = pd.DataFrame(X_test_bow.toarray())
 test_df['label'] = y_test
 
 # store the data inside data/features
-data_path = os.path.join("data","features")
+data_path = os.path.join("data","feature")
 
 os.makedirs(data_path)
 

@@ -1,0 +1,40 @@
+stages:
+  data_ingation:   # stage name
+    cmd: python src/data_ingation.py   # command to run
+    deps:           # dependencies (files/code used by the stage)
+      - src/data_ingation.py
+    outs:           # outputs (generated files/folders tracked by DVC)
+      - data/raw
+
+
+  data_prepossing:
+    cmd: python src/data_prepossing.py
+    deps:
+      - data/raw
+      - src/data_prepossing.py
+    outs:
+      - data/processed  
+
+  feature_engineerin:
+    cmd: python src/feature_engineering.py
+    deps:
+      - data/processed 
+      - src/feature_engineering.py
+    outs:
+      - data/feature
+
+  Model_building:
+    cmd: python src/Model_building.py
+    deps:
+      - data/feature
+      - src/Model_building.py
+    outs:
+      - model.pkl      
+
+  model_evolution:
+    cmd: python src/model_evolution.py
+    deps:
+      - model.pkl
+      - src/model_evolution.py
+    outs:
+      - metrics.json      
